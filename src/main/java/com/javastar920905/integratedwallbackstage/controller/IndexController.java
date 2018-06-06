@@ -5,6 +5,7 @@ import com.javastar920905.integratedwallbackstage.util.AliOSSConstants;
 import com.javastar920905.integratedwallbackstage.util.AliOSSFileManageUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
     /**
      * 根据分类获取文件列表
      *
-     * @param pageNum
+     * @param keyPath
      * @return
      */
-    @GetMapping(value = "/list/{pageNum}") public JSONArray listFiles(
-        @PathVariable Integer pageNum) {
+    @GetMapping(value = "/files/") public JSONArray listFiles(
+        @RequestParam String keyPath) {
         JSONArray array = new JSONArray();
-        array.addAll(AliOSSFileManageUtils.listFiles("books/3DSea", String.valueOf(pageNum)));
+        array.addAll(AliOSSFileManageUtils.listFiles(keyPath, 500));
         return array;
     }
 
